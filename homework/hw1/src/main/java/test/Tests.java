@@ -1,12 +1,21 @@
 package test;
 
+import annotations.*;
 import exceptions.TestAssertionError;
-import annotations.Disabled;
-import annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Tests {
+public class Tests extends BaseTest{
+
+    @BeforeEach
+    public void beforeEach() {
+        System.out.println("I am before each");
+    }
+
+    @AfterEach
+    public void afterEach() {
+        System.out.println("I am after each\n");
+    }
 
     @Test
     public void testSuccess1() {
@@ -28,7 +37,7 @@ public class Tests {
     }
 
     @Test
-    public void testFiled() {
+    public void testFailed() {
         System.out.println("I am failed test");
         assertTrue(false);
     }
