@@ -10,14 +10,12 @@ public class MyTreadPull {
     private final Thread[] threads;
     public int capacity;
     private volatile boolean isShutdown;
-    private volatile int activeTaskCount;
 
     public MyTreadPull(int capacity) {
         this.tasks = new LinkedList<>();
         this.capacity = capacity;
         this.threads = new Thread[capacity];
         this.isShutdown = false;
-        this.activeTaskCount = 0;
 
         for (int i = 0; i < capacity; i++) {
             threads[i] = new MyThread("Поток " + i);
@@ -28,7 +26,6 @@ public class MyTreadPull {
     public synchronized void execute(Runnable task) {
         if (!isShutdown) {
             tasks.offer(task);
-            activeTaskCount++;
             notifyAll();
         }
     }
@@ -62,7 +59,6 @@ public class MyTreadPull {
                         try {
                             MyTreadPull.this.wait();
                         } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
                         }
                     }
 
@@ -75,9 +71,7 @@ public class MyTreadPull {
                     try {
                         task.run();
                     } finally {
-                        synchronized (MyTreadPull.this) {
-                            activeTaskCount--;
-                        }
+                        synchronized (MyTreadPull.this) { }
                     }
                 }
             }
