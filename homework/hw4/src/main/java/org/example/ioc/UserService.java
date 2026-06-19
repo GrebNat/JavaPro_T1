@@ -1,10 +1,12 @@
 package org.example.ioc;
 
 import org.example.dto.User;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.*;
 
+@Component
 public class UserService {
 
     private final IUserDao userDao;
@@ -17,11 +19,11 @@ public class UserService {
         return userDao.createUser(username);
     }
 
-    public User getUserById(Integer id) throws SQLException {
+    public User getUserById(Integer id) {
         return userDao.getUserById(id);
     }
 
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 

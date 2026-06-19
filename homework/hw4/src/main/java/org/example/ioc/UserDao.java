@@ -3,11 +3,13 @@ package org.example.ioc;
 import com.zaxxer.hikari.HikariDataSource;
 import org.example.config.DataSourceConfig;
 import org.example.dto.User;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserDao implements IUserDao {
 
     private HikariDataSource hikariDataSource;
