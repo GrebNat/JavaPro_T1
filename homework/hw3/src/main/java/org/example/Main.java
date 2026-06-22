@@ -37,7 +37,7 @@ public class Main {
             });
         }
 
-        out.println("Ожидающие таски: " + pool.tasks.size());
+        out.println("Ожидающие таски: " + pool.getPoolSize());
 
         pool.shutdown();
         delay(3);

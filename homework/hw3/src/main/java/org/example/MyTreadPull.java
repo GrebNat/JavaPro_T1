@@ -6,7 +6,7 @@ import java.util.Queue;
 import static java.lang.System.out;
 
 public class MyTreadPull {
-    final Queue<Runnable> tasks;
+    private final Queue<Runnable> tasks;
     private final Thread[] threads;
     public int capacity;
     private volatile boolean isShutdown;
@@ -26,7 +26,7 @@ public class MyTreadPull {
     public synchronized void execute(Runnable task) {
         if (!isShutdown) {
             tasks.offer(task);
-            notifyAll();
+            notify();
         }
     }
 
@@ -40,13 +40,16 @@ public class MyTreadPull {
 
     public synchronized void shutdown() {
         isShutdown = true;
-        notifyAll();
+        notify();
+    }
+
+    public int getPoolSize(){
+        return tasks.size();
     }
 
     class MyThread extends Thread {
         public MyThread(String name) {
             super(name);
-            setDaemon(false);
         }
 
         @Override
@@ -58,7 +61,7 @@ public class MyTreadPull {
                     while (tasks.isEmpty() && !isShutdown) {
                         try {
                             MyTreadPull.this.wait();
-                        } catch (InterruptedException e) {
+                        } catch (InterruptedException ignored) {
                         }
                     }
 
