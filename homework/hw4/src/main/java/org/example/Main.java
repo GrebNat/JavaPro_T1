@@ -15,7 +15,6 @@ import java.util.Comparator;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("templates/spring-context.xml");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
         UserService userService = context.getBean(UserService.class);
