@@ -10,6 +10,7 @@ public class MyTreadPull {
     private final Thread[] threads;
     public int capacity;
     private volatile boolean isShutdown;
+    private final Object lockedObject = new Object();
 
     public MyTreadPull(int capacity) {
         this.tasks = new LinkedList<>();
@@ -23,10 +24,12 @@ public class MyTreadPull {
         }
     }
 
-    public synchronized void execute(Runnable task) {
-        if (!isShutdown) {
-            tasks.offer(task);
-            notify();
+    public void execute(Runnable task) {
+        synchronized (lockedObject) {
+            if (!isShutdown) {
+                tasks.offer(task);
+                lockedObject.notify();
+            }
         }
     }
 
@@ -40,10 +43,10 @@ public class MyTreadPull {
 
     public synchronized void shutdown() {
         isShutdown = true;
-        notify();
+        notifyAll();
     }
 
-    public int getPoolSize(){
+    public int getPoolSize() {
         return tasks.size();
     }
 
@@ -71,11 +74,7 @@ public class MyTreadPull {
                 }
 
                 if (task != null) {
-                    try {
-                        task.run();
-                    } finally {
-                        synchronized (MyTreadPull.this) { }
-                    }
+                    task.run();
                 }
             }
         }
