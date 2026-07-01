@@ -1,4 +1,4 @@
 CREATE TABLE users (
-                       id bigserial primary key,
+                       id serial primary key,
                        username varchar(255) unique
 );
