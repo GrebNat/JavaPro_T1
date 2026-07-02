@@ -24,11 +24,6 @@ public class UserService implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        val product = getProductById(1);
-        log.info("Product: {}", product);
-
-        val productsByUserId = getProductsByUserId(1);
-        log.info("All products by user_id: {}", productsByUserId);
 
         val allUsers = getAllUsers();
         log.info("All users: {}", allUsers);
@@ -61,12 +56,4 @@ public class UserService implements CommandLineRunner {
         userRepository.deleteById(id);
     }
 
-    public Product getProductById(Integer id) {
-        return productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
-
-    @Transactional
-    public List<Product> getProductsByUserId(Integer userId) {
-        return productRepository.findByUserId(userId);
-    }
 }
