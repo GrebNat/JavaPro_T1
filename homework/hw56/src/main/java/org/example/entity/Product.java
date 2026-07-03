@@ -2,6 +2,8 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
@@ -18,7 +20,7 @@ public class Product {
     private String account;
 
     @Column(name = "balance")
-    private java.math.BigDecimal balance;
+    private BigDecimal balance;
 
     @Column(name = "product_type")
     private String productType;

@@ -3,7 +3,6 @@ package org.example.controller;
 import lombok.AllArgsConstructor;
 import org.example.dto.ProductResponseDto;
 import org.example.service.ProductService;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +20,6 @@ public class ProductController {
     }
 
     @GetMapping(value = "/user/{userId}")
-    @Transactional
     public List<ProductResponseDto> getProductsByUserId(@PathVariable Integer userId) {
         return productService.getProductsByUserId(userId);
     }
