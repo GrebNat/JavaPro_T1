@@ -2,7 +2,6 @@ package org.example.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.dto.ProductResponseDto;
-import org.example.entity.Product;
 import org.example.service.ProductService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +10,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@ResponseBody
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/v1/products")
 public class ProductController {
 
     private final ProductService productService;
