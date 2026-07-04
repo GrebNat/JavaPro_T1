@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: payments-core
+
+server:
+  servlet:
+    context-path: "/payments-app"
+  port: 8982

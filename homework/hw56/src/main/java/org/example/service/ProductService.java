@@ -3,6 +3,7 @@ package org.example.service;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.dto.ProductResponseDto;
+import org.example.dto.UpdateProductAmountRequestDto;
 import org.example.entity.Product;
 import org.example.repository.ProductRepository;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -29,5 +30,12 @@ public class ProductService {
                 .findByUserId(userId).stream()
                 .map(x -> new ProductResponseDto(x.getId(), x.getAccount(), x.getBalance(), x.getProductType(), x.getUser()))
                 .toList();
+    }
+
+    public void save(Integer productId, UpdateProductAmountRequestDto amountRequest) {
+        //todo
+        //тут непонятно, как сохранять транзакцию
+        //уменьшать amount таблице? отдельную строку создавать? или третью таблицу создавать?
+        //или просто мапой обойтись?
     }
 }

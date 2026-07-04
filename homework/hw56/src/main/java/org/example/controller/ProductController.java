@@ -2,6 +2,7 @@ package org.example.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.dto.ProductResponseDto;
+import org.example.dto.UpdateProductAmountRequestDto;
 import org.example.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,5 +23,10 @@ public class ProductController {
     @GetMapping(value = "/user/{userId}")
     public List<ProductResponseDto> getProductsByUserId(@PathVariable Integer userId) {
         return productService.getProductsByUserId(userId);
+    }
+
+    @PostMapping(value = "/save/{productId}")
+    public void save(@PathVariable Integer productId, @RequestBody UpdateProductAmountRequestDto amountRequest) {
+        productService.save(productId, amountRequest);
     }
 }
