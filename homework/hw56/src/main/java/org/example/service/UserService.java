@@ -25,7 +25,7 @@ public class UserService implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        val allUsers = getAllUsers();
+/*        val allUsers = getAllUsers();
         log.info("All users: {}", allUsers);
 
         val userKirill = userRepository.findUserByUsername("Кирилл").orElseThrow(EntityNotFoundException::new);
@@ -37,7 +37,7 @@ public class UserService implements CommandLineRunner {
         deleteUser(newUser.getId());
 
         val maxId = userRepository.getMaxId();
-        log.info("Max id is: {}", maxId);
+        log.info("Max id is: {}", maxId);*/
     }
 
     public User createUser(String username) {
