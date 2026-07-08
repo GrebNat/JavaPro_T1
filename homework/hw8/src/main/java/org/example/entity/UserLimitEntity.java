@@ -2,14 +2,19 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "user_limit")
 @AllArgsConstructor
-public class UserLimit {
+@NoArgsConstructor
+public class UserLimitEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +28,5 @@ public class UserLimit {
 
     @Column(name = "reserved", nullable = false, precision = 15, scale = 2)
     private BigDecimal reserved;
-
-    public UserLimit() {
-
-    }
 }
 

@@ -25,3 +25,7 @@ server:
   servlet:
     context-path: "/limit-app"
   port: 8984
+
+limits:
+  default-limit: 100000.0
+  default-reserve-limit: 0.0

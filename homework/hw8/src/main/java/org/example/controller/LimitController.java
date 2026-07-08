@@ -1,39 +1,48 @@
 package org.example.controller;
 
-import org.example.dto.LimitUpdateDto;
+import lombok.AllArgsConstructor;
+import org.example.dto.LimitDebitDto;
+import org.example.dto.ReservedDto;
+import org.example.dto.UserLimitResponseDto;
 import org.example.service.LimitService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+import java.util.List;
 
-@Controller
+@RestController
+@AllArgsConstructor
 @RequestMapping(value = "/v1/limit")
 public class LimitController {
 
     private final LimitService limitService;
 
-    public LimitController(LimitService limitService) {
-        this.limitService = limitService;
+    @PostMapping("/debit/{userId}")
+    public void debitUserLimit(@PathVariable Long userId, @RequestBody LimitDebitDto limitUpdateDto) {
+        limitService.debitUserLimit(userId, limitUpdateDto.limit());
+    }
+
+    @PostMapping("/reserve/{userId}")
+    public void reserve(@PathVariable Long userId, @RequestBody ReservedDto reservedDto) {
+        limitService.reserve(userId, reservedDto.reserve());
+    }
+
+    @GetMapping("/confirm/{userId}")
+    public void confirmUserLimit(@PathVariable Long userId) {
+        limitService.confirm(userId);
+    }
+
+    @GetMapping("/cancel/{userId}")
+    public void cancelReservationUserLimit(@PathVariable Long userId) {
+        limitService.cancelReservation(userId);
     }
 
     @GetMapping("/{userId}")
-    public BigDecimal getLimitByUserId(@PathVariable Long userId){
+    public UserLimitResponseDto getLimitByUserId(@PathVariable Long userId) {
         return limitService.getLimitByUserId(userId);
     }
 
-    @PatchMapping("/{userId}")
-    public void updateUserLimit(@PathVariable Long userId, @RequestBody LimitUpdateDto limitUpdateDto){
-        limitService.updateUserLimit(userId, limitUpdateDto.limit());
-    }
-
-    @PatchMapping("/{userId}/default")
-    public void updateUserLimit(@PathVariable Long userId){
-        limitService.updateUserLimitToDefault(userId);
-    }
-
-    @PostMapping("/new")
-    public void addNewUserLimit(@RequestBody LimitUpdateDto limitDto){
-        limitService.addNewUserLimit(limitDto);
+    @GetMapping("/all")
+    public List<UserLimitResponseDto> getAllLimits() {
+        return limitService.getAllLimits();
     }
 }
