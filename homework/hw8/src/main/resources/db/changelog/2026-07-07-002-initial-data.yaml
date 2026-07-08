@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-insert-initial-data
+      author: dev
+      changes:
+        - insert:
+            tableName: user_limit
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: current_limit
+                  value: 100000.00
+              - column:
+                  name: reserved
+                  value: 0.00
+        - insert:
+            tableName: user_limit
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: current_limit
+                  value: 150000.00
+              - column:
+                  name: reserved
+                  value: 25000.00
+        - insert:
+            tableName: user_limit
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: current_limit
+                  value: 200000.00
+              - column:
+                  name: reserved
+                  value: 50000.00
+        - insert:
+            tableName: user_limit
+            columns:
+              - column:
+                  name: user_id
+                  value: 4
+              - column:
+                  name: current_limit
+                  value: 75000.00
+              - column:
+                  name: reserved
+                  value: 10000.00
+        - insert:
+            tableName: user_limit
+            columns:
+              - column:
+                  name: user_id
+                  value: 5
+              - column:
+                  name: current_limit
+                  value: 250000.00
+              - column:
+                  name: reserved
+                  value: 75000.00
