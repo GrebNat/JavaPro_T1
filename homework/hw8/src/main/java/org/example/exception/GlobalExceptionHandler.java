@@ -1,32 +1,28 @@
 package org.example.exception;
 
-import org.example.entity.UserLimitEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.ResponseEntity.status;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(LimitExceededException.class)
-    public ResponseEntity<org.example.exception.ExceptionResponseDto> handleInsufficientFunds(LimitExceededException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new org.example.exception.ExceptionResponseDto(
-                        HttpStatus.BAD_REQUEST.value(),
-                        e.getMessage(),
-                        LocalDateTime.now()
-                ));
+    public ResponseEntity<ExceptionResponseDto> handleInsufficientFunds(LimitExceededException e) {
+        return status(BAD_REQUEST).body(new ExceptionResponseDto(BAD_REQUEST.value(), e.getMessage(), now()));
     }
+
     @ExceptionHandler(UserLimitAlreadyExistsException.class)
-    public ResponseEntity<org.example.exception.ExceptionResponseDto> handleInsufficientFunds(UserLimitAlreadyExistsException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new org.example.exception.ExceptionResponseDto(
-                        HttpStatus.BAD_REQUEST.value(),
-                        e.getMessage(),
-                        LocalDateTime.now()
-                ));
+    public ResponseEntity<ExceptionResponseDto> handleInsufficientFunds(UserLimitAlreadyExistsException e) {
+        return status(BAD_REQUEST).body(new ExceptionResponseDto(BAD_REQUEST.value(), e.getMessage(), now()));
+    }
+
+    @ExceptionHandler(ReserveExceededException.class)
+    public ResponseEntity<ExceptionResponseDto> handleInsufficientFunds(ReserveExceededException e) {
+        return status(BAD_REQUEST).body(new ExceptionResponseDto(BAD_REQUEST.value(), e.getMessage(), now()));
     }
 }

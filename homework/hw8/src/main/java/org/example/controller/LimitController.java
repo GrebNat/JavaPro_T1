@@ -26,14 +26,14 @@ public class LimitController {
         limitService.reserve(userId, reservedDto.reserve());
     }
 
-    @GetMapping("/confirm/{userId}")
-    public void confirmUserLimit(@PathVariable Long userId) {
-        limitService.confirm(userId);
+    @PostMapping("/confirm/{userId}")
+    public void confirmUserLimit(@PathVariable Long userId, @RequestBody ReservedDto reservedDto) {
+        limitService.confirm(userId, reservedDto);
     }
 
-    @GetMapping("/cancel/{userId}")
-    public void cancelReservationUserLimit(@PathVariable Long userId) {
-        limitService.cancelReservation(userId);
+    @PostMapping("/cancel/{userId}")
+    public void cancelReservationUserLimit(@PathVariable Long userId, @RequestBody ReservedDto reservedDto) {
+        limitService.cancelReservation(userId, reservedDto);
     }
 
     @GetMapping("/{userId}")
